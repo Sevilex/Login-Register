@@ -4,20 +4,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,9 +37,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,6 +50,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.loginregester.ui.theme.LoginRegesterTheme
 
 class MainActivity : ComponentActivity() {
@@ -86,6 +99,7 @@ fun RegisterForm() {
                 UserNameField()
                 EmailFiled()
                 PasswordField()
+                CheckField()
 
             }
         }
@@ -95,14 +109,13 @@ fun RegisterForm() {
 
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun x() {
 }
 
 
-@Composable
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
 private fun UserNameField() {
     var txt by remember { mutableStateOf("") }
     TextField(
@@ -175,8 +188,8 @@ fun EmailFiled() {
     )
 }
 
-@Composable
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
 private fun PasswordField() {
     var password by remember { mutableStateOf("") }
     TextField(
@@ -213,4 +226,31 @@ private fun PasswordField() {
             //backgroundColor = Color(0xFFFAFAFA)
         )
     )
+}
+
+@Composable
+private fun CheckField(){
+    Box(Modifier.absoluteOffset(370.dp, (-120).dp)) {
+        IconButton(
+            onClick = {},
+            modifier = Modifier
+                .size(64.dp)
+                .clip(CircleShape)
+                .background(
+                    color = Color(0xFF44DD88)
+                )
+                .border(
+                    width = 2.dp,
+                    color = Color(0x8844AA88),
+                    shape = CircleShape
+                )
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Check,
+                contentDescription = "",
+                tint = White,
+                modifier = Modifier.size(32.dp)
+            )
+        }
+    }
 }
