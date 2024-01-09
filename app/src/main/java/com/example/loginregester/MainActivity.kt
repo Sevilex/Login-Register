@@ -32,6 +32,7 @@ fun RegisterForm() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
+        //
         Image(
             painter = painterResource(id = R.drawable.register_background),
             contentDescription = "",
