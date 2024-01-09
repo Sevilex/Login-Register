@@ -85,6 +85,7 @@ fun RegisterForm() {
             Column {
                 UserNameField()
                 EmailFiled()
+                PasswordField()
 
             }
         }
@@ -97,41 +98,6 @@ fun RegisterForm() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun x() {
-    var password by remember { mutableStateOf("") }
-    TextField(
-        value = password,
-        onValueChange = { password = it },
-        label = {
-            Text(
-                text = "Password",
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFFAAAAAA)
-            )
-        },
-        shape = RoundedCornerShape(bottomEnd = 48.dp),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password
-        ),
-        visualTransformation = PasswordVisualTransformation(),
-        colors = TextFieldDefaults.textFieldColors(
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            //backgroundColor = Color(0xFFFAFAFA)
-        ),
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Filled.Lock,
-                contentDescription = "",
-                tint = Color(0xFFCCCCCC)
-            )
-        },
-        modifier = Modifier
-            .width(400.dp)
-            .shadow(
-                elevation = 10.dp,
-                shape = RoundedCornerShape(bottomEnd = 48.dp)
-            )
-    )
 }
 
 
@@ -186,7 +152,7 @@ fun EmailFiled() {
                 color = Color(0xFFAAAAAA)
             )
         },
-        shape = RoundedCornerShape(topEnd = 48.dp),
+        //shape = RoundedCornerShape(topEnd = 48.dp),
         colors = TextFieldDefaults.textFieldColors(
             unfocusedIndicatorColor = Color(0xFFDDDDDD),
             focusedIndicatorColor = Color(0xFFCCCCCC),
@@ -206,5 +172,45 @@ fun EmailFiled() {
                 color = Color(0xFFDDDDDD),
                 //shape = RoundedCornerShape(topEnd = 48.dp),
             )
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun PasswordField() {
+    var password by remember { mutableStateOf("") }
+    TextField(
+        value = password,
+        onValueChange = { password = it },
+        label = {
+            Text(
+                text = "Password",
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFFAAAAAA)
+            )
+        },
+        shape = RoundedCornerShape(bottomEnd = 48.dp),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password
+        ),
+        visualTransformation = PasswordVisualTransformation(),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Filled.Lock,
+                contentDescription = "",
+                tint = Color(0xFFCCCCCC)
+            )
+        },
+        modifier = Modifier
+            .width(400.dp)
+            .shadow(
+                elevation = 10.dp,
+                shape = RoundedCornerShape(bottomEnd = 48.dp)
+            ),
+        colors = TextFieldDefaults.textFieldColors(
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            //backgroundColor = Color(0xFFFAFAFA)
+        )
     )
 }
