@@ -64,7 +64,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun RegisterForm() {
@@ -100,6 +99,7 @@ fun RegisterForm() {
                 EmailFiled()
                 PasswordField()
                 CheckField()
+                ButtonField()
 
             }
         }
@@ -107,11 +107,6 @@ fun RegisterForm() {
 }
 
 
-
-
-@Composable
-fun x() {
-}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -250,6 +245,46 @@ private fun CheckField(){
                 contentDescription = "",
                 tint = White,
                 modifier = Modifier.size(32.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun ButtonField(){
+    Box(Modifier.fillMaxWidth(), Alignment.TopEnd) {
+        Button(
+            onClick = {},
+            shape = RoundedCornerShape(
+                topStart= 48.dp,
+                bottomStart = 48.dp
+            ),
+            colors = ButtonDefaults.buttonColors(
+                //backgroundColor = Color(0xFFFAFAFA),
+                contentColor = Color(0xFFFF8F00),
+            ),
+            modifier = Modifier
+                .shadow(
+                    elevation = 5.dp,
+                    shape = RoundedCornerShape(
+                        topStart = 48.dp,
+                        bottomStart = 48.dp
+                    )
+                )
+                .border(
+                    width = 1.dp,
+                    color = Color(0xFFDDDDDD),
+                    shape = RoundedCornerShape(
+                        topStart = 48.dp,
+                        bottomStart = 48.dp
+                    )
+                )
+        ) {
+            Text(
+                text = "Login",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(12.dp)
             )
         }
     }
