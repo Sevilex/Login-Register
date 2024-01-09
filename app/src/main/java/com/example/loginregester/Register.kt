@@ -12,8 +12,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -33,7 +36,7 @@ import androidx.compose.ui.unit.sp
 
 
 
-/*
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterForcm() {
@@ -75,7 +78,7 @@ fun RegisterForcm() {
                 colors = TextFieldDefaults.textFieldColors(
                     unfocusedIndicatorColor = Color(0xFFDDDDDD),
                     focusedIndicatorColor = Color(0xFFCCCCCC),
-                    backgroundColor = Color(0xFFFAFAFA)
+                    //backgroundColor = Color(0xFFFAFAFA)
                 ),
                 leadingIcon = {
                     Icon(
@@ -108,7 +111,7 @@ fun RegisterForcm() {
                 colors = TextFieldDefaults.textFieldColors(
                     unfocusedIndicatorColor = Color(0xFFDDDDDD),
                     focusedIndicatorColor = Color(0xFFCCCCCC),
-                    backgroundColor = Color(0xFFFAFAFA)
+                    //backgroundColor = Color(0xFFFAFAFA)
                 ),
                 leadingIcon = {
                     Icon(
@@ -145,7 +148,7 @@ fun RegisterForcm() {
                 colors = TextFieldDefaults.textFieldColors(
                     unfocusedIndicatorColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
-                    backgroundColor = Color(0xFFFAFAFA)
+                    //backgroundColor = Color(0xFFFAFAFA)
                 ),
                 leadingIcon = {
                     Icon(
@@ -195,7 +198,7 @@ fun RegisterForcm() {
                         bottomStart = 48.dp
                     ),
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xFFFAFAFA),
+                        //backgroundColor = Color(0xFFFAFAFA),
                         contentColor = Color(0xFFFF8F00),
                     ),
                     modifier = Modifier
@@ -229,6 +232,7 @@ fun RegisterForcm() {
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Login() {
     Image(
@@ -269,7 +273,7 @@ fun Login() {
                 colors = TextFieldDefaults.textFieldColors(
                     unfocusedIndicatorColor = Color(0xFFDDDDDD),
                     focusedIndicatorColor = Color(0xFFCCCCCC),
-                    backgroundColor = Color(0xFFFAFAFA)
+                    //backgroundColor = Color(0xFFFAFAFA)
                 ),
                 leadingIcon = {
                     Icon(
@@ -306,7 +310,7 @@ fun Login() {
                 colors = TextFieldDefaults.textFieldColors(
                     unfocusedIndicatorColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
-                    backgroundColor = Color(0xFFFAFAFA)
+                    //backgroundColor = Color(0xFFFAFAFA)
                 ),
                 leadingIcon = {
                     Icon(
@@ -368,7 +372,7 @@ fun Login() {
                         bottomEnd = 48.dp
                     ),
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xFFFAFAFA),
+                        //backgroundColor = Color(0xFFFAFAFA),
                         contentColor = Color(0xFFFF8F00),
                     ),
                     modifier = Modifier
@@ -400,4 +404,3 @@ fun Login() {
     }
 }
 
- */
