@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,64 +40,113 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun LoginForm() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.login_background),
-            contentDescription = "",
-            contentScale = ContentScale.Crop,
-        )
+fun LoginForm(
+    navController: NavController,
+) {
+    if (isPersian) {
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
 
-        Column {
-            Box(
-                Modifier.padding(
-                    start = 230.dp,
-                    top = 300.dp,
-                    bottom = 100.dp
-                )
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
             ) {
-                Text(
-                    text = "Login",
-                    fontSize = 48.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF666666),
+                Image(
+                    painter = painterResource(id = R.drawable.login_background),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
                 )
+
+                Column {
+                    Box(
+                        Modifier.padding(
+                            start = 200.dp,
+                            top = 300.dp,
+                            bottom = 80.dp
+                        )
+                    ) {
+                        Text(
+                            text = if (isPersian) "ورود" else "Login",
+                            fontSize = 48.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF666666),
+                        )
+                    }
+                    Column {
+                        UserNameFieldLogin()
+                        PasswordFieldLogin()
+                        ArrowForwardFieldLogin()
+                        ForgetFieldLogin()
+                        RegisterFieldLogin(
+                            navController = navController
+                        )
+                    }
+                }
             }
+        }
+    } else {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.login_background),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+            )
+
             Column {
-                UserNameFieldLogin()
-                PasswordFieldLogin()
-                ArrowForwardFieldLogin()
-                ForgetFieldLogin()
-                RegisterFieldLogin()
+                Box(
+                    Modifier.padding(
+                        start = 200.dp,
+                        top = 300.dp,
+                        bottom = 80.dp
+                    )
+                ) {
+                    Text(
+                        text = if (isPersian) "ورود" else "Login",
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF666666),
+                    )
+                }
+                Column {
+                    UserNameFieldLogin()
+                    PasswordFieldLogin()
+                    ArrowForwardFieldLogin()
+                    ForgetFieldLogin()
+                    RegisterFieldLogin(
+                        navController = navController
+                    )
+                }
             }
         }
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserNameFieldLogin() {
     var txt by remember { mutableStateOf("") }
+
     TextField(
         value = txt,
         onValueChange = { txt = it },
         label = {
             Text(
-                text = "Username",
+                text = if (isPersian) "نام کاربری" else "UserName",
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFAAAAAA)
             )
@@ -129,12 +179,13 @@ fun UserNameFieldLogin() {
 @Composable
 fun PasswordFieldLogin() {
     var password by remember { mutableStateOf("") }
+
     TextField(
         value = password,
         onValueChange = { password = it },
         label = {
             Text(
-                text = "Password",
+                text = if (isPersian) "رمز عبور" else "Password",
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFAAAAAA)
             )
@@ -167,7 +218,7 @@ fun PasswordFieldLogin() {
 
 @Composable
 fun ArrowForwardFieldLogin() {
-    Box(Modifier.absoluteOffset(370.dp, (-90).dp)) {
+    Box(Modifier.absoluteOffset(if (isPersian) (-370).dp else 350.dp, (-90).dp)) {
         IconButton(
             onClick = {},
             modifier = Modifier
@@ -194,13 +245,14 @@ fun ArrowForwardFieldLogin() {
 
 @Composable
 fun ForgetFieldLogin() {
+
     Box(
         Modifier
             .fillMaxWidth()
             .padding(10.dp), Alignment.TopEnd
     ) {
         Text(
-            text = "Forgot ?",
+            text = if (isPersian) "فراموشی رمز" else "Forget ?",
             fontSize = 16.sp,
             color = Color(0xFF888888)
         )
@@ -208,10 +260,14 @@ fun ForgetFieldLogin() {
 }
 
 @Composable
-fun RegisterFieldLogin() {
+fun RegisterFieldLogin(
+    navController: NavController
+) {
     Box(Modifier.fillMaxWidth(), Alignment.TopStart) {
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate(route = ServiceScreens.RegisterScreen.name)
+            },
             shape = RoundedCornerShape(
                 topEnd = 48.dp,
                 bottomEnd = 48.dp
@@ -238,7 +294,7 @@ fun RegisterFieldLogin() {
                 )
         ) {
             Text(
-                text = "Register",
+                text = if (isPersian) "ثبت نام" else "Register",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(12.dp)

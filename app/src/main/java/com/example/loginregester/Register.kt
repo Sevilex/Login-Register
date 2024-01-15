@@ -30,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,52 +41,99 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
-
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun RegisterForm() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-
-        Image(
-            painter = painterResource(id = R.drawable.register_background),
-            contentDescription = "",
-            contentScale = ContentScale.Crop
-        )
-
-        Column {
-            Box(
-                modifier = Modifier.padding(
-                    top = 300.dp,
-                    start = 200.dp,
-                    bottom = 100.dp
-                )
+fun RegisterForm(
+    navController: NavController,
+) {
+    if (isPersian) {
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
             ) {
-                Text(
-                    text = "Register",
-                    //fontSize = 48.dp,
-                    modifier = Modifier.padding(1.dp),
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF666666),
-                )
-            }
-            Column {
-                UserNameField()
-                EmailFiled()
-                PasswordField()
-                CheckField()
-                ButtonField()
 
+                Image(
+                    painter = painterResource(id = R.drawable.register_background),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop
+                )
+
+                Column {
+                    Box(
+                        Modifier.padding(
+                            start = 180.dp,
+                            top = 300.dp,
+                            bottom = 100.dp
+                        )
+                    ) {
+                        Text(
+                            text = if (isPersian) "ثبت نام" else "Register",
+                            fontSize = 48.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF666666),
+                        )
+                    }
+                    Column {
+                        UserNameField()
+                        EmailFiled()
+                        PasswordField()
+                        CheckField()
+                        ButtonLoginField(
+                            navController = navController
+                        )
+
+                    }
+                }
+            }
+        }
+    } else {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.register_background),
+                contentDescription = "",
+                contentScale = ContentScale.Crop
+            )
+
+            Column {
+                Box(
+                    Modifier.padding(
+                        start = 180.dp,
+                        top = 300.dp,
+                        bottom = 100.dp
+                    )
+                ) {
+                    Text(
+                        text = if (isPersian) "ثبت نام" else "Register",
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF666666),
+                    )
+                }
+                Column {
+                    UserNameField()
+                    EmailFiled()
+                    PasswordField()
+                    CheckField()
+                    ButtonLoginField(
+                        navController = navController
+                    )
+
+                }
             }
         }
     }
@@ -100,7 +148,7 @@ private fun UserNameField() {
         onValueChange = { txt = it },
         label = {
             Text(
-                text = "UserName",
+                text = if (isPersian) "نام کاربری" else "UserName",
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFAAAAAA)
             )
@@ -137,7 +185,7 @@ fun EmailFiled() {
         onValueChange = { txt2 = it },
         label = {
             Text(
-                text = "Email",
+                text = if (isPersian) "ایمیل" else "Email",
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFAAAAAA)
             )
@@ -174,7 +222,7 @@ private fun PasswordField() {
         onValueChange = { password = it },
         label = {
             Text(
-                text = "Password",
+                text = if (isPersian) "رمز عبور" else "Password",
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFAAAAAA)
             )
@@ -206,8 +254,13 @@ private fun PasswordField() {
 }
 
 @Composable
-private fun CheckField(){
-    Box(Modifier.absoluteOffset(370.dp, (-120).dp)) {
+private fun CheckField() {
+    Box(
+        Modifier
+            .absoluteOffset(
+                if (isPersian) (-370).dp else 370.dp, (-120).dp
+            )
+    ) {
         IconButton(
             onClick = {},
             modifier = Modifier
@@ -233,12 +286,16 @@ private fun CheckField(){
 }
 
 @Composable
-private fun ButtonField(){
+private fun ButtonLoginField(
+    navController: NavController
+) {
     Box(Modifier.fillMaxWidth(), Alignment.TopEnd) {
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate(route = ServiceScreens.LoginScreen.name)
+            },
             shape = RoundedCornerShape(
-                topStart= 48.dp,
+                topStart = 48.dp,
                 bottomStart = 48.dp
             ),
             colors = ButtonDefaults.buttonColors(
@@ -263,7 +320,7 @@ private fun ButtonField(){
                 )
         ) {
             Text(
-                text = "Login",
+                text = if (isPersian) "ورود" else "Login",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(12.dp)
